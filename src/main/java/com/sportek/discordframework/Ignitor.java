@@ -1,11 +1,12 @@
 package com.sportek.discordframework;
 
-import com.sportek.discordframework.managers.ConfigManager;
+import javax.security.auth.login.LoginException;
 
 public class Ignitor {
 
-    public static void main(String[] args) {
-        System.out.println(ConfigManager.getInstance().getConfig().getToken());
+    public static void main(String[] args) throws LoginException {
+        DiscordJDA discordJDA = new DiscordJDA();
+        discordJDA.connect();
     }
 
 }

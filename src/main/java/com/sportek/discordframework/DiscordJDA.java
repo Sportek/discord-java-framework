@@ -8,7 +8,13 @@ import javax.security.auth.login.LoginException;
 
 public class DiscordJDA {
 
+    private JDA jda;
+
     public void connect() throws LoginException {
-        JDA jda = JDABuilder.createDefault(ConfigManager.getInstance().getConfig().getToken()).build();
+        jda = JDABuilder.createDefault(ConfigManager.getInstance().getConfig().getToken()).build();
+    }
+
+    public JDA getJda() {
+        return jda;
     }
 }
