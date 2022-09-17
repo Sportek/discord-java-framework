@@ -5,11 +5,7 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
@@ -68,8 +64,10 @@ public class ConfigManager {
                 try {
                     if (file.getParentFile().mkdir() || file.getParentFile().exists()) {
                         try {
-                            File copy = Path.of(Objects.requireNonNull(getClass().getClassLoader().getResource("config.yml")).toURI()).toFile();
-                            Files.copy(copy.toPath(), file.toPath());
+                            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("./config.yml")) {
+                                FileManager fileManager = new FileManager();
+                                fileManager.copyFileFromRessource(inputStream, file);
+                            }
                             LogManager.LOGGER.info("Created configuration file: " + file.getPath());
                             fileConfiguration = file;
                             return fileConfiguration;
