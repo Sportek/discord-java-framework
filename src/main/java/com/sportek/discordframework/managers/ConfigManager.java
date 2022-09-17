@@ -6,9 +6,6 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Objects;
 
 public class ConfigManager {
 
@@ -64,7 +61,7 @@ public class ConfigManager {
                 try {
                     if (file.getParentFile().mkdir() || file.getParentFile().exists()) {
                         try {
-                            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("./config.yml")) {
+                            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.yml")) {
                                 FileManager fileManager = new FileManager();
                                 fileManager.copyFileFromRessource(inputStream, file);
                             }
